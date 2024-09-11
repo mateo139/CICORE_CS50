@@ -80,7 +80,7 @@ def holes_definition():
 
 def z0_calculation(n, Fs, N, My, he):
      z0 = int(((n * Fs - N) / (12 * My) * he ** 2)/1000)
-     print ("z0= ", z0)
+     print ("z0= ", z0, "mm")
      return z0
 
 def hm_and_sigma_vorh_calculation(z0, n, Fs, N, My, he, be, e2):
@@ -89,7 +89,7 @@ def hm_and_sigma_vorh_calculation(z0, n, Fs, N, My, he, be, e2):
         print("Neutral axis is outside of crossection -> Only pressures appear in crossection.")
         hm = int((he + 2 * My * 1000/ (N - n * Fs)))
         print ("hm= ", hm, "mm")
-        sigma_vorh = (N - n * Fs)**2 * 1000 / (be * (he * (N - n * Fs) + 2 * My * 1000))           ### zaokrąglić najpierw w górę
+        sigma_vorh = (N - n * Fs)**2 * 1000 / (be * (he * (N - n * Fs) + 2 * My * 1000))                     ### zaokrąglić najpierw w górę
         sigma_vorh = round(sigma_vorh, 2)
         print ("sigma_vorh =  ", sigma_vorh, "MPa")
         return hm, sigma_vorh
@@ -97,9 +97,9 @@ def hm_and_sigma_vorh_calculation(z0, n, Fs, N, My, he, be, e2):
         print("Neutral axis is within the cross-section -> Tension and pressure areas exist.")
         F = int((N - n * Fs)/he * (he/2 - z0) + 6* My * 1000/he**3 * (he**2/4 - z0*2))                       ### przeliczyć jednostki
         print ("F= " , F, "kN")                   
-        hm = int(he + (2 * My * 1000 - F * e2) / (N - n * Fs - F))                                         ### przeliczyć jednostki
+        hm = int(he + (2 * My * 1000 - F * e2) / (N - n * Fs - F))                                           ### przeliczyć jednostki
         print ("hm= " , hm, "mm")
-        sigma_vorh = (N - n * Fs - F)**2 * 1000 / (be * (he * (N - n * Fs - F) + 2 * My * 1000 - F * e2))          ### przeliczyć jednostki  ### zaokrąglić najpierw w górę
+        sigma_vorh = (N - n * Fs - F)**2 * 1000 / (be * (he * (N - n * Fs - F) + 2 * My * 1000 - F * e2))    ### przeliczyć jednostki  ### zaokrąglić najpierw w górę
         sigma_vorh = round(sigma_vorh, 2)
         print ("sigma_vorh = " , sigma_vorh, "MPa")
 
@@ -110,8 +110,7 @@ def edge_distance_check(dr, te): # Funkcja sprawdzająca, czy odległość kraw�
     if dr > te:
         print("Dla te=", te, "mm, zalecana odległość krawędziowa dr powinna wynościć co najmniej tyle co te.")
 
-def screws_in_pressured_area_check(he, hm, be, d, n, sigma_zul): # Funkcja sprawdzająca, czy śruby znajdują się w obszarze ściskanym
-    te = 5 ########################## do zmiany
+def screws_in_pressured_area_check(he, hm, be, d, n, te): # Funkcja sprawdzająca, czy śruby znajdują się w obszarze ściskanym
     
     if hm <= 2 / 3 * he:
         print("Only one row of screws is in pressured area.")
@@ -122,6 +121,7 @@ def screws_in_pressured_area_check(he, hm, be, d, n, sigma_zul): # Funkcja spraw
         if sigma_zul > 30:
             sigma_zul = 30
 
+        print ("sigma_zul =  ", sigma_zul, "MPa")
         return sigma_zul
 
     else:
@@ -131,16 +131,17 @@ def screws_in_pressured_area_check(he, hm, be, d, n, sigma_zul): # Funkcja spraw
         if sigma_zul > 30:
             sigma_zul = 30
         
+        print ("sigma_zul =  ", sigma_zul, "MPa")
         return sigma_zul
 
 def stress_proof (sigma_vorh, sigma_zul): # Funkcja sprawdzająca, czy naprężenia są mniejsze niż wartość dopuszczalna
     if abs(sigma_vorh) < sigma_zul:
-        print("Stress is less than allowable stress.")
+        print(f"The proof is successful, and the resulting stresses {abs(sigma_vorh)} [MPa], are less than the allowable stresses {sigma_zul} [MPa].")
+        #        print(f"Wartość he = {he}, Wartość be = {be}")
     else:
-        print("Stress is greater than allowable stress.")
+        print(f"The proof is failed, and the resulting stresses {abs(sigma_vorh)} [MPa], are higher than the allowable stresses {sigma_zul} [MPa].")
 
 def main():
-    ##### te = [ 5, 10, 15, 20]
 
     # Wywołanie funkcji i zwrócenie wartości he, be, My, N, Fs, n, e2, d
     he, be = geometry_decision()
@@ -152,10 +153,12 @@ def main():
     z0 = z0_calculation(n, Fs, N, My, he)
 
     hm, sigma_vorh = hm_and_sigma_vorh_calculation(z0, n, Fs, N, My, he, be, e2)
+     
+    te = 5
 
-    screws_in_pressured_area_check(he, hm, be, d, n)
-    
-    sigma_zul = screws_in_pressured_area_check(he, hm, be, d, n, sigma_zul)
+    sigma_zul = screws_in_pressured_area_check(he, hm, be, d, n, te)
+
+    stress_proof(sigma_vorh, sigma_zul)
 
 
 if __name__ == "__main__":
