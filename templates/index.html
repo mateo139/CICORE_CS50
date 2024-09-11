@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obliczenia</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Wprowadź dane</h1>
+        <form action="/calculate" method="POST" id="calculation-form">
+            <div class="form-group">
+                <label>Wybierz rodzaj: </label>
+                <select name="choice" id="choice" onchange="toggleInputs()">
+                    <option value="p">Płyta czołowa</option>
+                    <option value="b">Podkładka elastomerowa</option>
+                </select>
+            </div>
+
+            <div id="plate_inputs" class="form-group">
+                <label>Wysokość płyty (hp): </label>
+                <input type="text" name="hp" required><br>
+                <label>Szerokość płyty (bp): </label>
+                <input type="text" name="bp" required><br>
+                <label>Odległość krawędziowa (dr): </label>
+                <input type="text" name="dr" required><br>
+            </div>
+
+            <div id="bearing_inputs" class="form-group" style="display:none;">
+                <label>he: </label>
+                <input type="text" name="he"><br>
+                <label>be: </label>
+                <input type="text" name="be"><br>
+            </div>
+
+            <div class="form-group">
+                <label>Charakterystyki: </label>
+                <select name="influence_choice">
+                    <option value="c">Charakterystyczne</option>
+                    <option value="d">Obliczeniowe</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Moment zginający (My): </label>
+                <input type="text" name="My"><br>
+                <label>Siła osiowa (N): </label>
+                <input type="text" name="N"><br>
+                <label>Siła sprężająca śruby (Fs): </label>
+                <input type="text" name="Fs"><br>
+            </div>
+
+            <div class="form-group">
+                <label>Ilość otworów (n): </label>
+                <input type="text" name="n" required><br>
+                <label>Dystans e2: </label>
+                <input type="text" name="e2" required><br>
+                <label>Średnica otworów (d): </label>
+                <input type="text" name="d" required><br>
+            </div>
+
+            <input type="submit" value="Oblicz" class="btn-submit">
+        </form>
+    </div>
+
+    <script>
+        function toggleInputs() {
+            const choice = document.getElementById('choice').value;
+    
+            if (choice === 'p') {
+                document.getElementById('plate_inputs').style.display = 'block';
+                document.getElementById('bearing_inputs').style.display = 'none';
+    
+                // Dodaj required do pól płyty czołowej
+                document.querySelector('input[name="hp"]').setAttribute('required', true);
+                document.querySelector('input[name="bp"]').setAttribute('required', true);
+                document.querySelector('input[name="dr"]').setAttribute('required', true);
+    
+                // Usuń required z pól podkładki elastomerowej
+                document.querySelector('input[name="he"]').removeAttribute('required');
+                document.querySelector('input[name="be"]').removeAttribute('required');
+            } else if (choice === 'b') {
+                document.getElementById('plate_inputs').style.display = 'none';
+                document.getElementById('bearing_inputs').style.display = 'block';
+    
+                // Dodaj required do pól podkładki elastomerowej
+                document.querySelector('input[name="he"]').setAttribute('required', true);
+                document.querySelector('input[name="be"]').setAttribute('required', true);
+    
+                // Usuń required z pól płyty czołowej
+                document.querySelector('input[name="hp"]').removeAttribute('required');
+                document.querySelector('input[name="bp"]').removeAttribute('required');
+                document.querySelector('input[name="dr"]').removeAttribute('required');
+            }
+        }
+    
+        // Uruchom toggleInputs() na wypadek, gdyby użytkownik zmienił wybór podczas nawigacji wstecz
+        window.onload = toggleInputs;
+    </script>
+    
+</body>
+</html>

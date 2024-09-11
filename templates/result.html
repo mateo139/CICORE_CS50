@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wynik</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Wyniki obliczeń</h1>
+        <p><strong>Wartość he:</strong> {{ he }} mm</p>
+        <p><strong>Wartość be:</strong> {{ be }} mm</p>
+        <p><strong>Wartość z0:</strong> {{ z0 }} mm</p>
+        <p><strong>Wartość hm:</strong> {{ hm }} mm</p>
+        <p><strong>Wartość sigma_vorh:</strong> {{ sigma_vorh }} [MPa]</p>
+    </div>
+</body>
+</html>
