@@ -14,7 +14,8 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    width: 400px;
+    text-align: center;
 }
 
 h1 {
@@ -50,7 +51,18 @@ input[type="text"]:focus, select:focus {
     outline: none;
 }
 
+.welcome-image {
+    width: 300px;        /* Ustawienie stałej szerokości obrazka */
+    height: auto;        /* Zachowanie proporcji obrazka */
+    display: block;      /* Ustawienie obrazka jako blokowego elementu */
+    margin: 0 auto 20px; /* Wyśrodkowanie obrazka i dodanie odstępu poniżej */
+    border-radius: 8px;  /* Opcjonalne zaokrąglenie rogów */
+}
+
+
 .btn-submit {
+    display: inline-block;
+    text-align: center; 
     background-color: #007bff;
     color: white;
     padding: 10px 20px;
@@ -59,6 +71,7 @@ input[type="text"]:focus, select:focus {
     cursor: pointer;
     width: 100%;
     font-size: 10px;
+    
 }
 
 .btn-submit:hover {

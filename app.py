@@ -38,8 +38,13 @@ def hm_and_sigma_vorh_calculation(z0, n, Fs, N, My, he, be, e2):
         sigma_vorh = (N - n * Fs - F)**2 * 1000 / (be * (he * (N - n * Fs - F) + 2 * My * 1000 - F * e2))
     return hm, round(sigma_vorh, 2)
 
-# Route to handle input form
+
 @app.route('/')
+def welcome():
+    return render_template('welcome.html')
+
+# Route to handle input form
+@app.route('/input')
 def index():
     return render_template('index.html')
 

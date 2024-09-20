@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WELCOME!</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <img src="{{ url_for('static', filename='welcome_image.jpg') }}" alt="Welcome image" class="welcome-image">
+        <h1>Butt joint elastomeric layer calculator</h1>
+        <p>Go to the next page, to start calculations</p>
+        <a href="{{ url_for('index') }}" class="btn">START</a>
+    </div>
+</body>
+</html>

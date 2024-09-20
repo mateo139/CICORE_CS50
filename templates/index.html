@@ -8,22 +8,22 @@
 </head>
 <body>
     <div class="container">
-        <h1>Wprowadź dane</h1>
+        <h1>Enter data</h1>
         <form action="/calculate" method="POST" id="calculation-form">
             <div class="form-group">
-                <label>Wybierz rodzaj: </label>
+                <label>Define an element: </label>
                 <select name="choice" id="choice" onchange="toggleInputs()">
-                    <option value="p">Płyta czołowa</option>
-                    <option value="b">Podkładka elastomerowa</option>
+                    <option value="p">End-plate</option>
+                    <option value="b">Elastomeric layer</option>
                 </select>
             </div>
 
             <div id="plate_inputs" class="form-group">
-                <label>Wysokość płyty (hp): </label>
+                <label>End-plate height (hp): </label>
                 <input type="text" name="hp" required><br>
-                <label>Szerokość płyty (bp): </label>
+                <label>End-plate width (bp): </label>
                 <input type="text" name="bp" required><br>
-                <label>Odległość krawędziowa (dr): </label>
+                <label>Edge distance (dr): </label>
                 <input type="text" name="dr" required><br>
             </div>
 
@@ -35,32 +35,32 @@
             </div>
 
             <div class="form-group">
-                <label>Charakterystyki: </label>
+                <label>Values of influences : </label>
                 <select name="influence_choice">
-                    <option value="c">Charakterystyczne</option>
-                    <option value="d">Obliczeniowe</option>
+                    <option value="c">Characteristic</option>
+                    <option value="d">Design</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label>Moment zginający (My): </label>
+                <label>Bending moment (My): </label>
                 <input type="text" name="My"><br>
-                <label>Siła osiowa (N): </label>
+                <label>Axial force (N): </label>
                 <input type="text" name="N"><br>
-                <label>Siła sprężająca śruby (Fs): </label>
+                <label>Preload bolt force (Fs): </label>
                 <input type="text" name="Fs"><br>
             </div>
 
             <div class="form-group">
-                <label>Ilość otworów (n): </label>
+                <label>Number of holes (n): </label>
                 <input type="text" name="n" required><br>
-                <label>Dystans e2: </label>
+                <label>Distance "e2" between bolt rows: </label>
                 <input type="text" name="e2" required><br>
-                <label>Średnica otworów (d): </label>
+                <label>Diameter of holes (d): </label>
                 <input type="text" name="d" required><br>
             </div>
 
-            <input type="submit" value="Oblicz" class="btn-submit">
+            <input type="submit" value="CALCULATE" class="btn-submit">
         </form>
     </div>
 
