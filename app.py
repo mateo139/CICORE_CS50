@@ -3,8 +3,10 @@ import math
 
 app = Flask(__name__)
 
-# Funkcje do obliczeń (możesz przenieść swój kod tutaj)
-def geometry_decision(choice, hp=None, bp=None, dr=None, he=None, be=None):
+# Engineering calculations functions:
+
+# Function for geometry definition
+def geometry_decision(choice, hp=None, bp=None, dr=None, he=None, be=None): 
     if choice == "p":
         he = hp - 2 * dr
         be = bp - 2 * dr
@@ -13,6 +15,7 @@ def geometry_decision(choice, hp=None, bp=None, dr=None, he=None, be=None):
         be = be
     return he, be
 
+# Function for characteristic influences definition
 def get_characteristic_influences(choice, My=None, N=None, My_d=None, Nd=None, Fs=None):
     if choice == "c":
         return My, N, Fs
@@ -21,13 +24,16 @@ def get_characteristic_influences(choice, My=None, N=None, My_d=None, Nd=None, F
         N = Nd / 1.4
         return My, N, Fs
 
+# Function for holes definition
 def holes_definition(n, e2, d):
     return n, e2, d
 
+# Function fort calculation of zero pressure point z0
 def z0_calculation(n, Fs, N, My, he):
     z0 = int(((n * Fs - N) / (12 * My) * he ** 2) / 1000)
     return z0
 
+# Function for calculation of equivalent height hm and stress sigma_vorh
 def hm_and_sigma_vorh_calculation(z0, n, Fs, N, My, he, be, e2):
     if z0 > he / 2:
         hm = int((he + 2 * My * 1000 / (N - n * Fs)))
@@ -36,9 +42,9 @@ def hm_and_sigma_vorh_calculation(z0, n, Fs, N, My, he, be, e2):
         F = int((N - n * Fs) / he * (he / 2 - z0) + 6 * My * 1000 / he**3 * (he**2 / 4 - z0 * 2))
         hm = int(he + (2 * My * 1000 - F * e2) / (N - n * Fs - F))
         sigma_vorh = (N - n * Fs - F)**2 * 1000 / (be * (he * (N - n * Fs - F) + 2 * My * 1000 - F * e2))
-    return hm, round(sigma_vorh, 2)
+    return F, hm, round(sigma_vorh, 2)
 
-
+# Route to welcome page
 @app.route('/')
 def welcome():
     return render_template('welcome.html')
@@ -50,8 +56,10 @@ def index():
 
 # Route to handle form submission and perform calculations
 @app.route('/calculate', methods=['POST'])
+
+# Fuction for calculation of the results
 def calculate():
-    # Pobranie danych z formularza
+    # Request form data
     choice = request.form['choice']
     if choice == 'p':
         hp = float(request.form['hp'])
@@ -63,7 +71,7 @@ def calculate():
         be = float(request.form['be'])
         he, be = geometry_decision(choice, he=he, be=be)
     
-    # Pobranie danych do charakterystyk
+    # Request characteristic influences
     influence_choice = request.form['influence_choice']
     if influence_choice == 'c':
         My = float(request.form['My'])
@@ -75,16 +83,18 @@ def calculate():
         Fs = float(request.form['Fs'])
         My, N, Fs = get_characteristic_influences(influence_choice, My_d=My_d, Nd=Nd, Fs=Fs)
     
-    # Definicja otworów
+    # Request holes definition
     n = int(request.form['n'])
     e2 = float(request.form['e2'])
     d = float(request.form['d'])
     
+    # Calculate z0, hm and sigma_vorh
     z0 = z0_calculation(n, Fs, N, My, he)
-    hm, sigma_vorh = hm_and_sigma_vorh_calculation(z0, n, Fs, N, My, he, be, e2)
+    F, hm, sigma_vorh = hm_and_sigma_vorh_calculation(z0, n, Fs, N, My, he, be, e2)
 
     # Zwróć wynik na stronę
-    return render_template('result.html', he=he, be=be, z0=z0, hm=hm, sigma_vorh=sigma_vorh)
+    return render_template('result.html', he=he, be=be, z0=z0, hm=hm, sigma_vorh=sigma_vorh, F=F)
 
+# Run the app
 if __name__ == '__main__':
     app.run(debug=True)

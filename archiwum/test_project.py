@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from project import main, z0_calculation, hm_and_sigma_vorh_calculation, screws_in_pressured_area_check
+from archiwum.project import main, z0_calculation, hm_and_sigma_vorh_calculation, screws_in_pressured_area_check
 
 class TestIntegration(unittest.TestCase):
 
