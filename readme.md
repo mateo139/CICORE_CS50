@@ -11,4 +11,4 @@ Basic features:
 - presentation of static schemes of forces acting on the connection
 
 ## How will it be executed?
-Program will be executed via web page [https://](https://codin.com.pl/)
+Program will be executed via web page https://codin.com.pl/
