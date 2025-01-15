@@ -1,4 +1,5 @@
 # Ignorowanie pliku __pycache__
 __pycache__/
 archiwum
+venv/
 .DS_Store
