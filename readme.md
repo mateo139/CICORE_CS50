@@ -14,7 +14,6 @@ Basic features:
 Download code from [GitHub](https://github.com/mateo139/CICORE_CS50)
 
 ## Descripton of folders and files
-
 ### root directory
 - app.py - it is Flask main application file. It contains routes and functions that enable requests and calculations
 
@@ -27,18 +26,18 @@ Download code from [GitHub](https://github.com/mateo139/CICORE_CS50)
 - pycache/ - this directory contains bytecode files and it is generated automatically (what is more it should be ignored by Git)
 
 ### static
-- styles.css
-- welcome_image.jpg
+- static/ - the purpose of this directory is to collect static files (eg. CSS and images)
+- styles.css - it contains styles and images
+- welcome_image.jpg - it is image used in welcome section
 
 ### templates
-- index.html
-- result.html
-- welcome.html
+- templates/ - it is used for rendering web pages
+- welcome.html - it is used for rendering of welcome section 
+- index.html - it is template of input section
+- result.html - it is template of result section
 
 ### venv
-- bin
-- include
-- lib
-- pyvenv.cfg
+- venv/ - it is a director due to virtual environment purpose. it contains dependencies and packages from the project. It is recommended to ignore this directory with version control system
+
 
 
