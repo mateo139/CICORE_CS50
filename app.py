@@ -5,6 +5,7 @@ from utils import (
     get_characteristic_influences,
     hm_and_sigma_vorh_calculation,
     z0_calculation,
+    shape_factor_and_allowable_stresses_calculation,
 )
 
 app = Flask(__name__)
@@ -63,11 +64,16 @@ def calculate():
     z0 = z0_calculation(n, Fs, N, My, he)
     F, hm, sigma_vorh = hm_and_sigma_vorh_calculation(z0, n, Fs, N, My, he, be, e2)
 
+    # Calculate shape factor "S" and allowable stresses "sigma_all"
+    sigma_all = shape_factor_and_allowable_stresses_calculation(he, hm, be, e2, n, d, te=10)
+
+    # Comparison of compression stresses with allowable stresses
+    verification_status = stresses_verification(sigma_vorh, sigma_all, verification_status)
+
     # Zwróć wynik na stronę
     return render_template(
-        "result.html", he=he, be=be, z0=z0, hm=hm, sigma_vorh=sigma_vorh, F=F
+        "result.html", he=he, be=be, z0=z0, hm=hm, sigma_vorh=sigma_vorh, F=F, sigma_all=sigma_all, verification_status=verification_status
     )
-
 
 # Run the app
 if __name__ == "__main__":
