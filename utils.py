@@ -41,6 +41,7 @@ def hm_and_sigma_vorh_calculation(z0, n, Fs, N, My, he, be, e2):
         sigma_vorh = (
             (N - n * Fs) ** 2 * 1000 / (be * (he * (N - n * Fs) + 2 * My * 1000))
         )
+        F = 0           #[kN]
     else:
         "Case 2: tension and compression"
         F = int(
@@ -52,16 +53,16 @@ def hm_and_sigma_vorh_calculation(z0, n, Fs, N, My, he, be, e2):
         )
     return F, hm, abs(round(sigma_vorh, 2))
 
-def shape_factor_and_allowable_stresses_calculation(he, hm, be, e2, n, d, te=10):
-    if hm <= e2:
+def shape_factor_and_allowable_stresses_calculation(he, hm, be, n, d, te=10):
+    if hm <= 2/3 * he:
         "Case A: One row of screws under compression"
         S = (hm * be - n/2 *pi * d**2 / 4 ) / (te *(hm * 2 + be * 2 + n/2 *pi * d))
         sigma_all = min(30, (S**2 + S + 1)/0.70)
 
     else:
-        hm > e2
+        hm > 2/3 * he
         "Case B: Two rows of screws under compression"
-        S = (he * be - 2 * n *pi * d**2 / 4 ) / (te *(2 * hm +2 * be + 2 * n *pi * d))
+        S = (hm * be - n *pi * d**2 / 4 ) / (te *(2 * hm +2 * be + n *pi * d))
         sigma_all = min(30, (S**2 + S + 1)/0.70)
 
     return round(S, 1) , round(sigma_all, 2)

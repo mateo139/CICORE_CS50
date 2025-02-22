@@ -66,7 +66,7 @@ def calculate():
     F, hm, sigma_vorh = hm_and_sigma_vorh_calculation(z0, n, Fs, N, My, he, be, e2)
 
     # Calculate shape factor "S" and allowable stresses "sigma_all"
-    sigma_all = shape_factor_and_allowable_stresses_calculation(he, hm, be, e2, n, d, te=10)
+    S, sigma_all = shape_factor_and_allowable_stresses_calculation(he, hm, be, n, d, te=10)
 
     # Initialize verification_status
     verification_status = None
@@ -76,7 +76,7 @@ def calculate():
 
     # Zwróć wynik na stronę
     return render_template(
-        "result.html", he=he, be=be, z0=z0, hm=hm, sigma_vorh=sigma_vorh, F=F, sigma_all=sigma_all, verification_status=verification_status
+        "result.html", he=he, be=be, z0=z0, hm=hm, sigma_vorh=sigma_vorh, F=F, sigma_all=sigma_all, S=S, verification_status=verification_status
     )
 
 # Run the app
