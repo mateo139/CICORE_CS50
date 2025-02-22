@@ -6,6 +6,7 @@ from utils import (
     hm_and_sigma_vorh_calculation,
     z0_calculation,
     shape_factor_and_allowable_stresses_calculation,
+    stresses_verification,
 )
 
 app = Flask(__name__)
@@ -66,6 +67,9 @@ def calculate():
 
     # Calculate shape factor "S" and allowable stresses "sigma_all"
     sigma_all = shape_factor_and_allowable_stresses_calculation(he, hm, be, e2, n, d, te=10)
+
+    # Initialize verification_status
+    verification_status = None
 
     # Comparison of compression stresses with allowable stresses
     verification_status = stresses_verification(sigma_vorh, sigma_all, verification_status)

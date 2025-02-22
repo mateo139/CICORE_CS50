@@ -2,7 +2,7 @@
     - Video Demo:  <URL HERE>
 
 ## What will your software do?
-My python program is web application on the base of flask framework. Aim of this application is to support structural engineern in calculation of steel end-plate connections with thermal separation layer made by NBR (which are produced by Calenberg GmbH). Application apply algorithm of Profesor Nasdala from Institute for Structural Analysis in University of Hanover in Germany.
+My python program is web application on the base of flask framework. Aim of this application is to support structural engineern in calculation of steel end-plate connections with thermal separation layer made by NBR (which are produced by Calenberg Ingenieure GmbH). Application apply algorithm of Profesor Nasdala from Institute for Structural Analysis in University of Hanover in Germany.
     
 ## What features will it have?
 Basic features:

@@ -44,21 +44,18 @@ def hm_and_sigma_vorh_calculation(z0, n, Fs, N, My, he, be, e2):
     else:
         "Case 2: tension and compression"
         F = int(
-            (N - n * Fs) / he * (he / 2 - z0)
-            + 6 * My * 1000 / he**3 * (he**2 / 4 - z0 * 2)
+            (N - n * Fs) / (he / 1000) * ((he/1000) / 2 - z0/1000) + 6 * My / (he / 1000)**3 * ((he/1000)**2 / 4 - (z0/1000) ** 2)
         )
         hm = int(he + (2 * My * 1000 - F * e2) / (N - n * Fs - F))
         sigma_vorh = (
-            (N - n * Fs - F) ** 2
-            * 1000
-            / (be * (he * (N - n * Fs - F) + 2 * My * 1000 - F * e2))
+            (N - n * Fs - F) ** 2 * 1000 / (be * (he * (N - n * Fs - F) + 2 * My * 1000 - F * e2))
         )
-    return F, hm, abs(round(sigma_vorh, 1))
+    return F, hm, abs(round(sigma_vorh, 2))
 
 def shape_factor_and_allowable_stresses_calculation(he, hm, be, e2, n, d, te=10):
     if hm <= e2:
         "Case A: One row of screws under compression"
-        S = (hm * be - n *pi * d**2 / 4 ) / (te *(hm * 2 + be * 2 + n *pi * d))
+        S = (hm * be - n/2 *pi * d**2 / 4 ) / (te *(hm * 2 + be * 2 + n/2 *pi * d))
         sigma_all = min(30, (S**2 + S + 1)/0.70)
 
     else:
@@ -67,7 +64,7 @@ def shape_factor_and_allowable_stresses_calculation(he, hm, be, e2, n, d, te=10)
         S = (he * be - 2 * n *pi * d**2 / 4 ) / (te *(2 * hm +2 * be + 2 * n *pi * d))
         sigma_all = min(30, (S**2 + S + 1)/0.70)
 
-    return round(sigma_all, 1)
+    return round(S, 1) , round(sigma_all, 2)
 
 def stresses_verification(sigma_vorh, sigma_all, verification_status):
     "Function for verification of stresses"
