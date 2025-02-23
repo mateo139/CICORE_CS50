@@ -74,3 +74,45 @@ def stresses_verification(sigma_vorh, sigma_all, verification_status):
     else:
         verification_status = "Not fulfilled"   
     return verification_status
+
+
+def save_data_to_csv(form, z0, F, hm, sigma_vorh, S, sigma_all, verification_status):
+    """Save form data and calculation results to a CSV file"""
+    data_dir = "data"
+    if not os.path.exists(data_dir):
+        os.makedirs(data_dir)
+    
+    csv_file = os.path.join(data_dir, "results.csv")
+    fieldnames = ["choice", "hp", "bp", "dr", "he", "be", "influence_choice", "My", "N", "Fs", "My_d", "Nd", "n", "e2", "d", "z0", "F", "hm", "sigma_vorh", "S", "sigma_all", "verification_status"]
+    
+    with open(csv_file, mode="a", newline="") as file:
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+        
+        # Write header if file is empty
+        if file.tell() == 0:
+            writer.writeheader()
+        
+        writer.writerow({
+            "choice": form.get("choice"),
+            "hp": form.get("hp"),
+            "bp": form.get("bp"),
+            "dr": form.get("dr"),
+            "he": form.get("he"),
+            "be": form.get("be"),
+            "influence_choice": form.get("influence_choice"),
+            "My": form.get("My"),
+            "N": form.get("N"),
+            "Fs": form.get("Fs"),
+            "My_d": form.get("My_d"),
+            "Nd": form.get("Nd"),
+            "n": form.get("n"),
+            "e2": form.get("e2"),
+            "d": form.get("d"),
+            "z0": z0,
+            "F": F,
+            "hm": hm,
+            "sigma_vorh": sigma_vorh,
+            "S": S,
+            "sigma_all": sigma_all,
+            "verification_status": verification_status
+        })

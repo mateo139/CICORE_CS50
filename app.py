@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request
+import csv
+import os
 
 from utils import (
     geometry_decision,
@@ -7,22 +9,20 @@ from utils import (
     z0_calculation,
     shape_factor_and_allowable_stresses_calculation,
     stresses_verification,
+    save_data_to_csv,
 )
 
 app = Flask(__name__)
-
 
 @app.route("/")
 def welcome():
     "Route to welcome page"
     return render_template("welcome.html")
 
-
 @app.route("/input")
 def index():
     "Route to handle input form"
     return render_template("index.html")
-
 
 @app.route("/calculate", methods=["POST"])
 def calculate():
@@ -74,7 +74,10 @@ def calculate():
     # Comparison of compression stresses with allowable stresses
     verification_status = stresses_verification(sigma_vorh, sigma_all, verification_status)
 
-    # Zwróć wynik na stronę
+    # Save data to CSV
+    save_data_to_csv(form, z0, F, hm, sigma_vorh, S, sigma_all, verification_status)
+
+    # Return result to the page
     return render_template(
         "result.html", he=he, be=be, z0=z0, hm=hm, sigma_vorh=sigma_vorh, F=F, sigma_all=sigma_all, S=S, verification_status=verification_status
     )
