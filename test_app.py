@@ -35,7 +35,6 @@ def test_get_characteristic_influences():
     assert N == 100
     assert Fs == 30
 
-
 def test_z0_calculation():
     """Test the z0_calculation function"""
     z0 = z0_calculation(4, 80, -20, 30, 320)
@@ -81,7 +80,7 @@ def test_2_z0_calculation():
     """Test the z0_calculation function"""
     z0 = z0_calculation(4, 100, -68, 6.2, 230)
     assert z0 == 332
-    
+
 def test_stresses_verification():
     """Test the stresses_verification function"""
     verification_status = stresses_verification(16.67, 17.54, None)
