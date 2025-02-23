@@ -18,6 +18,26 @@
         <p><strong>Allowable compression stresses:</strong> {{ sigma_all }} [MPa]</p>
         <p><strong>Shape factor for compressed equivalent zone:</strong> {{ S }} [-]</p>
         <p><strong>Stresses verification</strong> {{ verification_status }}</p>
+        <form action="{{ url_for('generate_pdf') }}" method="post">
+            <input type="hidden" name="choice" value="{{ request.form.choice }}">
+            <input type="hidden" name="hp" value="{{ request.form.hp }}">
+            <input type="hidden" name="bp" value="{{ request.form.bp }}">
+            <input type="hidden" name="dr" value="{{ request.form.dr }}">
+            <input type="hidden" name="he" value="{{ he }}">
+            <input type="hidden" name="be" value="{{ be }}">
+            <input type="hidden" name="influence_choice" value="{{ request.form.influence_choice }}">
+            <input type="hidden" name="My" value="{{ request.form.My }}">
+            <input type="hidden" name="N" value="{{ request.form.N }}">
+            <input type="hidden" name="Fs" value="{{ request.form.Fs }}">
+            <input type="hidden" name="My_d" value="{{ request.form.My_d }}">
+            <input type="hidden" name="Nd" value="{{ request.form.Nd }}">
+            <input type="hidden" name="n" value="{{ request.form.n }}">
+            <input type="hidden" name="e2" value="{{ request.form.e2 }}">
+            <input type="hidden" name="d" value="{{ request.form.d }}">
+            <button type="submit">Download PDF</button>
+        </form>
+    
     </div>
+    
 </body>
 </html>
