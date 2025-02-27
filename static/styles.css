@@ -1,85 +1,112 @@
+h1 {
+    text-align: center;
+    font-size: 2em;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #3b82f680;
+}
+
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    font-family: Arial, sans-serif;
 }
 
 .container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 400px;
-    text-align: center;
+    width: 80%;
+    margin: 0 auto;
 }
 
-h1 {
-    font-size: 16px;
-    text-align: center;
-    color: #333;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
 }
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+th,
+td {
+    padding: 12px;
+}
+
+th {
+    background-color: #3b82f680;
+    color: white;
+}
+
+button {
+    background-color: #3b82f680;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #3b82f680;
+}
+
 
 .form-group {
     margin-bottom: 15px;
+    display: flex;
+    align-items: center;
 }
 
 label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: #555;
-    font-size: 12px;
 }
 
-input[type="text"], select {
-    width: 75%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+.input-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+input[type="text"],
+select {
+    width: calc(100% - 50px);
+    /* Adjust width to leave space for unit */
+    padding: 8px;
     margin-bottom: 10px;
-    font-size: 10px;
-    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
-input[type="text"]:focus, select:focus {
-    border-color: #007bff;
-    outline: none;
+.unit {
+    margin-left: 10px;
+    font-weight: bold;
 }
-
-.welcome-image {
-    width: 300px;        /* Ustawienie stałej szerokości obrazka */
-    height: auto;        /* Zachowanie proporcji obrazka */
-    display: block;      /* Ustawienie obrazka jako blokowego elementu */
-    margin: 0 auto 20px; /* Wyśrodkowanie obrazka i dodanie odstępu poniżej */
-    border-radius: 8px;  /* Opcjonalne zaokrąglenie rogów */
-}
-
 
 .btn-submit {
-    display: inline-block;
-    text-align: center; 
-    background-color: #007bff;
+    background-color: #3b82f680;
     color: white;
     padding: 10px 20px;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
+    display: block;
     width: 100%;
-    font-size: 10px;
-    
+    margin-top: 20px;
 }
 
 .btn-submit:hover {
-    background-color: #0056b3;
+    background-color: #3b82f680;
 }
-
-p {
-    color: #333;
-    font-size: 10px;
-}
-
