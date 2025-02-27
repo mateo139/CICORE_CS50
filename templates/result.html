@@ -1,43 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RESULTS</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
+
 <body>
     <div class="container">
         <h1>RESULTS</h1>
-        <p><strong>Elastomeric bearing height he:</strong> {{ he }} [mm]</p>
-        <p><strong>Elastomeric bearing width be:</strong> {{ be }} [mm]</p>
-        <p><strong>Neutral axis distance from center z0:</strong> {{ z0 }} [mm]</p>
-        <p><strong>Bolt tensile force F:</strong> {{ F }} kN</p>
-        <p><strong>Equivalent height of the compressed zone hm:</strong> {{ hm }} [mm]</p>
-        <p><strong>Equivalent compression stresses:</strong> {{ sigma_vorh }} [MPa]</p>
-        <p><strong>Allowable compression stresses:</strong> {{ sigma_all }} [MPa]</p>
-        <p><strong>Shape factor for compressed equivalent zone:</strong> {{ S }} [-]</p>
-        <p><strong>Stresses verification</strong> {{ verification_status }}</p>
+        <p><strong>Elastomeric bearing height he:</strong> {{ result['he'] }} [mm]</p>
+        <p><strong>Elastomeric bearing width be:</strong> {{ result['be'] }} [mm]</p>
+        <p><strong>Elastomeric bearing thickness te:</strong> {{ result['te'] }} [mm]</p>
+        <p><strong>Neutral axis distance from center z0:</strong> {{ result['z0'] }} [mm]</p>
+        <p><strong>Bolt tensile force F:</strong> {{ result['F'] }} kN</p>
+        <p><strong>Equivalent height of the compressed zone hm:</strong> {{ result['hm'] }} [mm]</p>
+        <p><strong>Equivalent compression stresses:</strong> {{ result['sigma_vorh'] }} [MPa]</p>
+        <p><strong>Allowable compression stresses:</strong> {{ result['sigma_all'] }} [MPa]</p>
+        <p><strong>Shape factor for compressed equivalent zone:</strong> {{ result['S'] }} [-]</p>
+        <p><strong>Stresses verification</strong> {{ result['verification_status'] }}</p>
         <form action="{{ url_for('generate_pdf') }}" method="post">
-            <input type="hidden" name="choice" value="{{ request.form.choice }}">
-            <input type="hidden" name="hp" value="{{ request.form.hp }}">
-            <input type="hidden" name="bp" value="{{ request.form.bp }}">
-            <input type="hidden" name="dr" value="{{ request.form.dr }}">
-            <input type="hidden" name="he" value="{{ he }}">
-            <input type="hidden" name="be" value="{{ be }}">
-            <input type="hidden" name="influence_choice" value="{{ request.form.influence_choice }}">
-            <input type="hidden" name="My" value="{{ request.form.My }}">
-            <input type="hidden" name="N" value="{{ request.form.N }}">
-            <input type="hidden" name="Fs" value="{{ request.form.Fs }}">
-            <input type="hidden" name="My_d" value="{{ request.form.My_d }}">
-            <input type="hidden" name="Nd" value="{{ request.form.Nd }}">
-            <input type="hidden" name="n" value="{{ request.form.n }}">
-            <input type="hidden" name="e2" value="{{ request.form.e2 }}">
-            <input type="hidden" name="d" value="{{ request.form.d }}">
+            choice <input name="choice" value="{{ request.form.choice }}">
+            hp <input name="hp" value="{{ request.form.hp }}">
+            bp <input name="bp" value="{{ request.form.bp }}">
+            dr <input name="dr" value="{{ request.form.dr }}">
+            he <input name="he" value="{{ he }}">
+            be <input name="be" value="{{ be }}">
+            te <input name="te" value="{{ te }}">
+            influence_choice <input name="influence_choice" value="{{ request.form.influence_choice }}">
+            My <input name="My" value="{{ request.form.My }}">
+            N <input name="N" value="{{ request.form.N }}">
+            Fs <input name="Fs" value="{{ request.form.Fs }}">
+            My_d <input name="My_d" value="{{ request.form.My_d }}">
+            Nd <input name="Nd" value="{{ request.form.Nd }}">
+            n <input name="n" value="{{ request.form.n }}">
+            e2 <input name="e2" value="{{ request.form.e2 }}">
+            d <input name="d" value="{{ request.form.d }}">
             <button type="submit">Download PDF</button>
         </form>
-    
+
     </div>
-    
+
 </body>
+
 </html>

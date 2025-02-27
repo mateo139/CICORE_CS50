@@ -15,7 +15,11 @@ Download code from [GitHub](https://github.com/mateo139/CICORE_CS50)
 
 ## Descripton of folders and files
 ### root directory
-- app.py - it is Flask main application file. It contains routes and functions that enable requests and calculations
+- app.py - it is Flask main application file. It contains routes that enable requests and calculations
+
+- utils.py - this file contains functions
+
+- test_app.py - this file contains unit tests for functions
 
 - requirements.txt - it contains dependencies necessary in project
 
