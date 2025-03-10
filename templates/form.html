@@ -4,104 +4,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WELCOME!</title>
+    <title>Welcome!</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles2.css') }}">
 </head>
 
 <body>
     <section class="hero background-image back-photo is-fullheight">
-
         <div class="hero-body">
             <div class="container">
                 <div class="columns is-centered">
-                    <div class="column is-7 is-primary">
+                    <div class="column is-8">
                         <div class="box">
-                            <h1>Enter data</h1>
+                            <h1 class="title has-text-centered">Please enter data.</h1>
+
                             <form action="/calculate" method="POST" id="calculation-form">
-                                <div class="form-group">
-                                    <div class="field">
-                                        <label class="label">Define an element: </label>
-                                        <p class="control">
+
+                                <div class="field">
+                                    <label class="label">Define an element:</label>
+                                    <div class="control">
+                                        <div class="select">
                                             <select name="choice" id="choice" onchange="toggleInputs()">
                                                 <option value="p">End-plate</option>
                                                 <option value="b">Elastomeric layer</option>
                                             </select>
-                                        </p>
+                                        </div>
                                     </div>
                                 </div>
 
-
-                                <div class="field">
-                                    <label class="label">Name </label>
-                                    <p class="control">
-                                        <input class="input" type="text" placeholder="Text input">
-                                    </p>
+                                <div class="columns is-multiline">
+                                    <div class="column is-6">
+                                        <div class="field">
+                                            <label class="label">End-plate height (hp):</label>
+                                            <div class="control">
+                                                <input class="input" type="text" name="hp" required
+                                                    placeholder="Enter value"> [mm]
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column is-6">
+                                        <div class="field">
+                                            <label class="label">End-plate width (bp):</label>
+                                            <div class="control">
+                                                <input class="input" type="text" name="bp" required
+                                                    placeholder="Enter value"> [mm]
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column is-6">
+                                        <div class="field">
+                                            <label class="label">Edge distance (dr):</label>
+                                            <div class="control">
+                                                <input class="input" type="text" name="dr" required
+                                                    placeholder="Enter value"> [mm]
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column is-6">
+                                        <div class="field">
+                                            <label class="label">Thickness of elastomeric bearing (te):</label>
+                                            <div class="control">
+                                                <div class="select">
+                                                    <select name="te" required>
+                                                        <option value="5">5</option>
+                                                        <option value="10">10</option>
+                                                        <option value="15">15</option>
+                                                        <option value="20">20</option>
+                                                    </select>
+                                                </div> [mm]
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column is-6">
+                                        <div class="field">
+                                            <label class="label">Bending moment (My):</label>
+                                            <div class="control">
+                                                <input class="input" type="text" name="My" placeholder="Enter value">
+                                                [kNm]
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column is-6">
+                                        <div class="field">
+                                            <label class="label">Axial force (N):</label>
+                                            <div class="control">
+                                                <input class="input" type="text" name="N" placeholder="Enter value">
+                                                [kN]
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column is-6">
+                                        <div class="field">
+                                            <label class="label">Preload bolt force (Fs):</label>
+                                            <div class="control">
+                                                <input class="input" type="text" name="Fs" placeholder="Enter value">
+                                                [kN]
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column is-6">
+                                        <div class="field">
+                                            <label class="label">Number of holes (n):</label>
+                                            <div class="control">
+                                                <input class="input" type="text" name="n" required
+                                                    placeholder="Enter value"> [pcs]
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column is-6">
+                                        <div class="field">
+                                            <label class="label">Distance "e2" between bolt rows:</label>
+                                            <div class="control">
+                                                <input class="input" type="text" name="e2" required
+                                                    placeholder="Enter value"> [mm]
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column is-6">
+                                        <div class="field">
+                                            <label class="label">Diameter of holes (d):</label>
+                                            <div class="control">
+                                                <input class="input" type="text" name="d" required
+                                                    placeholder="Enter value"> [mm]
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div id="plate_inputs" class="form-group">
-                                    <label>End-plate height (hp): </label>
-                                    <input type="text" name="hp" required> [mm]<br>
-                                    <label>End-plate width (bp): </label>
-                                    <input type="text" name="bp" required> [mm]<br>
-                                    <label>Edge distance (dr): </label>
-                                    <input type="text" name="dr" required> [mm]<br>
+                                <div class="field has-text-centered">
+                                    <button type="submit" class="button is-primary">Calculate</button>
                                 </div>
-
-                                <div id="bearing_inputs" class="form-group" style="display:none;">
-                                    <label>he: </label>
-                                    <input type="text" name="he"> [mm]<br>
-                                    <label>be: </label>
-                                    <input type="text" name="be"> [mm]<br>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Thickness of elastomeric bearing (te): </label>
-                                    <select name="te" required>
-                                        <option value="5">5</option>
-                                        <option value="10">10</option>
-                                        <option value="15">15</option>
-                                        <option value="20">20</option>
-                                    </select> [mm]<br>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Values of influences : </label>
-                                    <select name="influence_choice">
-                                        <option value="c">Characteristic</option>
-                                        <option value="d">Design</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Bending moment (My): </label>
-                                    <input type="text" name="My"> [kNm]<br>
-                                    <label>Axial force (N): </label>
-                                    <input type="text" name="N"> [kN]<br>
-                                    <label>Preload bolt force (Fs): </label>
-                                    <input type="text" name="Fs"> [kN]<br>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Number of holes (n): </label>
-                                    <input type="text" name="n" required> [pcs]<br>
-                                    <label>Distance "e2" between bolt rows: </label>
-                                    <input type="text" name="e2" required> [mm]<br>
-                                    <label>Diameter of holes (d): </label>
-                                    <input type="text" name="d" required> [mm]<br>
-                                </div>
-
-                                <input type="submit" value="CALCULATE" class="btn-submit">
                             </form>
-
                         </div>
                     </div>
                 </div>
             </div>
-
+        </div>
     </section>
-
-
 </body>
 
 </html>
