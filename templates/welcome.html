@@ -1,17 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WELCOME!</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles2.css') }}">
 </head>
+
 <body>
-    <div class="container">
-        <img src="{{ url_for('static', filename='welcome_image.jpg') }}" alt="Welcome image" class="welcome-image">
-        <h1>Butt joint elastomeric layer calculator</h1>
-        <p>Go to the next page, to start calculations</p>
-        <a href="{{ url_for('index') }}" class="btn">START</a>
-    </div>
+    <section class="hero background-image back-photo is-fullheight">
+
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns is-centered">
+                    <div class="column is-7">
+                        <h1 class="title is-1">Welcome to the butt joint elastomeric layer calculator</h1>
+                        <p class="subtitle is-3">Go to the next page, to start calculations</p>
+                        <a href="{{ url_for('form') }}" class="button is-primary is-large">START</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
 </body>
+
 </html>

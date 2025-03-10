@@ -25,9 +25,9 @@ def welcome():
 
 
 @app.route("/input")
-def index():
+def form():
     "Route to handle input form"
-    return render_template("index.html")
+    return render_template("form.html")
 
 
 @app.route("/calculate", methods=["POST"])

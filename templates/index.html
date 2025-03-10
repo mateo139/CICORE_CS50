@@ -5,76 +5,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculations</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> -->
 </head>
 
 <body>
-    <div class="container">
-        <h1>Enter data</h1>
-        <form action="/calculate" method="POST" id="calculation-form">
-            <div class="form-group">
-                <label>Define an element: </label>
-                <select name="choice" id="choice" onchange="toggleInputs()">
-                    <option value="p">End-plate</option>
-                    <option value="b">Elastomeric layer</option>
-                </select>
-            </div>
+    <section class="section is-medium">
+        <div class="container">
+            <h1>Please enter data</h1>
+            <form action="/calculate" method="POST" id="calculation-form">
+                <div class="form-group">
+                    <label>Define an element: </label>
+                    <select name="choice" id="choice" onchange="toggleInputs()">
+                        <option value="p">End-plate</option>
+                        <option value="b">Elastomeric layer</option>
+                    </select>
+                </div>
 
-            <div id="plate_inputs" class="form-group">
-                <label>End-plate height (hp): </label>
-                <input type="text" name="hp" required> [mm]<br>
-                <label>End-plate width (bp): </label>
-                <input type="text" name="bp" required> [mm]<br>
-                <label>Edge distance (dr): </label>
-                <input type="text" name="dr" required> [mm]<br>
-            </div>
+                <div id="plate_inputs" class="form-group">
+                    <label>End-plate height (hp): </label>
+                    <input type="text" name="hp" required> [mm]<br>
+                    <label>End-plate width (bp): </label>
+                    <input type="text" name="bp" required> [mm]<br>
+                    <label>Edge distance (dr): </label>
+                    <input type="text" name="dr" required> [mm]<br>
+                </div>
 
-            <div id="bearing_inputs" class="form-group" style="display:none;">
-                <label>he: </label>
-                <input type="text" name="he"> [mm]<br>
-                <label>be: </label>
-                <input type="text" name="be"> [mm]<br>
-            </div>
+                <div id="bearing_inputs" class="form-group" style="display:none;">
+                    <label>he: </label>
+                    <input type="text" name="he"> [mm]<br>
+                    <label>be: </label>
+                    <input type="text" name="be"> [mm]<br>
+                </div>
 
-            <div class="form-group">
-                <label>Thickness of elastomeric bearing (te): </label>
-                <select name="te" required>
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
-                </select> [mm]<br>
-            </div>
+                <div class="form-group">
+                    <label>Thickness of elastomeric bearing (te): </label>
+                    <select name="te" required>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </select> [mm]<br>
+                </div>
 
-            <div class="form-group">
-                <label>Values of influences : </label>
-                <select name="influence_choice">
-                    <option value="c">Characteristic</option>
-                    <option value="d">Design</option>
-                </select>
-            </div>
+                <div class="form-group">
+                    <label>Values of influences : </label>
+                    <select name="influence_choice">
+                        <option value="c">Characteristic</option>
+                        <option value="d">Design</option>
+                    </select>
+                </div>
 
-            <div class="form-group">
-                <label>Bending moment (My): </label>
-                <input type="text" name="My"> [kNm]<br>
-                <label>Axial force (N): </label>
-                <input type="text" name="N"> [kN]<br>
-                <label>Preload bolt force (Fs): </label>
-                <input type="text" name="Fs"> [kN]<br>
-            </div>
+                <div class="form-group">
+                    <label>Bending moment (My): </label>
+                    <input type="text" name="My"> [kNm]<br>
+                    <label>Axial force (N): </label>
+                    <input type="text" name="N"> [kN]<br>
+                    <label>Preload bolt force (Fs): </label>
+                    <input type="text" name="Fs"> [kN]<br>
+                </div>
 
-            <div class="form-group">
-                <label>Number of holes (n): </label>
-                <input type="text" name="n" required> [pcs]<br>
-                <label>Distance "e2" between bolt rows: </label>
-                <input type="text" name="e2" required> [mm]<br>
-                <label>Diameter of holes (d): </label>
-                <input type="text" name="d" required> [mm]<br>
-            </div>
+                <div class="form-group">
+                    <label>Number of holes (n): </label>
+                    <input type="text" name="n" required> [pcs]<br>
+                    <label>Distance "e2" between bolt rows: </label>
+                    <input type="text" name="e2" required> [mm]<br>
+                    <label>Diameter of holes (d): </label>
+                    <input type="text" name="d" required> [mm]<br>
+                </div>
 
-            <input type="submit" value="CALCULATE" class="btn-submit">
-        </form>
-    </div>
+                <input type="submit" value="CALCULATE" class="btn-submit">
+            </form>
+        </div>
+    </section>
 
     <script>
         function toggleInputs() {
