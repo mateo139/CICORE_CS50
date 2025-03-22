@@ -71,7 +71,7 @@ def test_2_z0_calculation():
 
 def test_2_hm_and_sigma_vorh_calculation():
     """Test the get_characteristic_influences function"""
-    My, N, Fs = get_characteristic_influences("d", My_d=140, Nd=280, Fs=30)
+    My, N, Fs = get_characteristic_influences("d", My=140, N=280, Fs=30)
     assert My == 100
     assert N == 200
     assert Fs == 30

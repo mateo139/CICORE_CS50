@@ -4,107 +4,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RESULTS</title>
+    <title>Results of Calculation - Steel End-Plate Calculator</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles2.css') }}">
 </head>
 
 <body>
+    <section class="hero background-image back-photo is-fullheight is-light">
+        <div class="hero-body">
+            <div class="container">
+                <div class="box">
+                    <h1 class="title is-2 has-text-centered has-text-light">Results of Calculation</h1>
+                    <table class="table is-striped is-hoverable is-fullwidth">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Parameter</th>
+                                <th>Value</th>
+                                <th>Unit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Bearing height</td>
+                                <td>he</td>
+                                <td>{{ result['he'] }}</td>
+                                <td>mm</td>
+                            </tr>
+                            <tr>
+                                <td>Bearing width</td>
+                                <td>be</td>
+                                <td>{{ result['be'] }}</td>
+                                <td>mm</td>
+                            </tr>
+                            <tr>
+                                <td>Bearing thickness</td>
+                                <td>te</td>
+                                <td>{{ result['te'] }}</td>
+                                <td>mm</td>
+                            </tr>
+                            <tr>
+                                <td>Neutral axis</td>
+                                <td>z0</td>
+                                <td>{{ result['z0'] }}</td>
+                                <td>mm</td>
+                            </tr>
+                            <tr>
+                                <td>Tensile force</td>
+                                <td>F</td>
+                                <td>{{ result['F'] }}</td>
+                                <td>kN</td>
+                            </tr>
+                            <tr>
+                                <td>Compressed zone height</td>
+                                <td>hm</td>
+                                <td>{{ result['hm'] }}</td>
+                                <td>mm</td>
+                            </tr>
+                            <tr>
+                                <td>Equivalent compression stresses</td>
+                                <td>σ_act</td>
+                                <td>{{ result['sigma_vorh'] }}</td>
+                                <td>MPa</td>
+                            </tr>
+                            <tr>
+                                <td>Allowable compression stresses</td>
+                                <td>σ_all</td>
+                                <td>{{ result['sigma_all'] }}</td>
+                                <td>MPa</td>
+                            </tr>
+                            <tr>
+                                <td>Shape factor</td>
+                                <td>S</td>
+                                <td>{{ result['S'] }}</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Stresses verification</td>
+                                <td>Verification</td>
+                                <td>{{ result['verification_status'] }}</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="has-text-centered">
+                        <form action="{{ url_for('generate_pdf') }}" method="post">
+                            <input name="choice" type="hidden" value="{{ request.form.choice }}">
+                            <input name="hp" type="hidden" value="{{ request.form.hp }}">
+                            <input name="bp" type="hidden" value="{{ request.form.bp }}">
+                            <input name="dr" type="hidden" value="{{ request.form.dr }}">
+                            <input name="he" type="hidden" value="{{ request.form.he }}">
+                            <input name="be" type="hidden" value="{{ request.form.be }}">
+                            <input name="te" type="hidden" value="{{ request.form.te }}">
+                            <input name="influence_choice" type="hidden" value="{{ request.form.influence_choice }}">
+                            <input name="My" type="hidden" value="{{ request.form.My }}">
+                            <input name="N" type="hidden" value="{{ request.form.N }}">
+                            <input name="Fs" type="hidden" value="{{ request.form.Fs }}">
+                            <input name="My_d" type="hidden" value="{{ request.form.My_d }}">
+                            <input name="Nd" type="hidden" value="{{ request.form.Nd }}">
+                            <input name="n" type="hidden" value="{{ request.form.n }}">
+                            <input name="e2" type="hidden" value="{{ request.form.e2 }}">
+                            <input name="d" type="hidden" value="{{ request.form.d }}">
+                            <button type="submit" class="button is-primary is-large">Download PDF</button>
+                        </form>
+                        <a href="{{ url_for('welcome') }}" class="button is-light is-medium mt-5 ml-3">Home</a>
+                        <a href="{{ url_for('form') }}" class="button is-light is-medium mt-5">Back to form</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>
+                <strong>Steel End-Plate Calculator</strong> by
+                <a href="https://codin.com.pl" target="_blank">CODIN Mateusz Laska</a>.
+            </p>
+        </div>
+    </footer>
 
-    <div class="container">
-        <h1>Results of calculation</h1>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Description</th>
-                    <th scope="col">Parameter</th>
-                    <th scope="col">Value</th>
-                    <th scope="col">Unit</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">Bearing height</th>
-                    <td>he</td>
-                    <td>{{ result['he'] }}</td>
-                    <td>mm</td>
-                </tr>
-                <tr>
-                    <th scope="row">Bearing width</th>
-                    <td>be</td>
-                    <td>{{ result['be'] }}</td>
-                    <td>mm</td>
-                </tr>
-                <tr>
-                    <th scope="row">Bearing thickness</th>
-                    <td>te</td>
-                    <td>{{ result['te'] }}</td>
-                    <td>mm</td>
-                </tr>
-                <tr>
-                    <th scope="row">Neutral axis</th>
-                    <td>z0</td>
-                    <td>{{ result['z0'] }}</td>
-                    <td>mm</td>
-                </tr>
-                <tr>
-                    <th scope="row">Tensile force</th>
-                    <td>F</td>
-                    <td>{{ result['F'] }}</td>
-                    <td>kN</td>
-                </tr>
-                <tr>
-                    <th scope="row">Compressed zone height</th>
-                    <td>hm</td>
-                    <td>{{ result['hm'] }}</td>
-                    <td>mm</td>
-                </tr>
-                <tr>
-                    <th scope="row">Equivalent compression stresses</th>
-                    <td>σ_act</td>
-                    <td>{{ result['sigma_vorh'] }}</td>
-                    <td>MPa</td>
-                </tr>
-                <tr>
-                    <th scope="row">Allowable compression stresses</th>
-                    <td>σ_all</td>
-                    <td>{{ result['sigma_all'] }}</td>
-                    <td>MPa</td>
-                </tr>
-                <tr>
-                    <th scope="row">Shape factor</th>
-                    <td>S</td>
-                    <td>{{ result['S'] }}</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <th scope="row">Stresses verification</th>
-                    <td>Verification</td>
-                    <td>{{ result['verification_status'] }}</td>
-                    <td>-</td>
-                </tr>
-            </tbody>
-        </table>
-        <form action="{{ url_for('generate_pdf') }}" method="post">
-            <input name="choice" type="hidden" value="{{ request.form.choice }}">
-            <input name="hp" type="hidden" value="{{ request.form.hp }}">
-            <input name="bp" type="hidden" value="{{ request.form.bp }}">
-            <input name="dr" type="hidden" value="{{ request.form.dr }}">
-            <input name="he" type="hidden" value="{{ request.form.he }}">
-            <input name="be" type="hidden" value="{{ request.form.be }}">
-            <input name="te" type="hidden" value="{{ request.form.te }}">
-            <input name="influence_choice" type="hidden" value="{{ request.form.influence_choice }}">
-            <input name="My" type="hidden" value="{{ request.form.My }}">
-            <input name="N" type="hidden" value="{{ request.form.N }}">
-            <input name="Fs" type="hidden" value="{{ request.form.Fs }}">
-            <input name="My_d" type="hidden" value="{{ request.form.My_d }}">
-            <input name="Nd" type="hidden" value="{{ request.form.Nd }}">
-            <input name="n" type="hidden" value="{{ request.form.n }}">
-            <input name="e2" type="hidden" value="{{ request.form.e2 }}">
-            <input name="d" type="hidden" value="{{ request.form.d }}">
-            <button type="submit">Download PDF</button>
-        </form>
-    </div>
 </body>
 
 </html>

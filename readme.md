@@ -1,47 +1,104 @@
- # STEEL END-PLATE THERMAL SEPARATION LAYER CALCULATOR
-    - Video Demo:  <URL HERE>
+# STEEL END-PLATE THERMAL SEPARATION LAYER CALCULATOR
 
-## What will your software do?
-My python program is web application on the base of flask framework. Aim of this application is to support structural engineern in calculation of steel end-plate connections with thermal separation layer made by NBR (which are produced by Calenberg Ingenieure GmbH). Application apply algorithm of Profesor Nasdala from Institute for Structural Analysis in University of Hanover in Germany.
-    
-## What features will it have?
-Basic features:
-- calculation of stresses in the structural bearing with check of allowable stresses.
-- presentation of stress distribution due to influences like: axial force, prestressing forces, bending moment
-- presentation of static schemes of forces acting on the connection
+## Video Demo
+[Watch the demo here](URL HERE)
 
-## How will it be executed?
-Download code from [GitHub](https://github.com/mateo139/CICORE_CS50)
+## Overview
+This project is a Python-based web application built using the Flask framework. It assists structural engineers in calculating steel end-plate connections with a thermal separation layer made of NBR (produced by Calenberg Ingenieure GmbH). The application implements an algorithm developed by Professor Nasdala from the Institute for Structural Analysis at the University of Hanover, Germany.
 
-## Descripton of folders and files
-### root directory
-- app.py - it is Flask main application file. It contains routes that enable requests and calculations
+## Features
 
-- utils.py - this file contains functions
+### Basic Features
+- **Stress Calculations**: Computes stresses in the structural bearing and verifies them against allowable stress limits.
+- **Force Distribution**: Displays stress distribution due to factors such as axial force, prestressing forces, and bending moments.
+- **Static Schemes**: Visualizes static force schemes acting on the connection.
+- **PDF Report Generation**: Generates a downloadable PDF report with calculation results.
 
-- test_app.py - this file contains unit tests for functions
+### Additional Features
+- **Dynamic Input Forms**: Allows users to switch between input forms for different structural elements (e.g., end-plates, elastomeric bearings).
+- **Unit Testing**: Includes unit tests to ensure the accuracy of calculations.
 
-- requirements.txt - it contains dependencies necessary in project
+## How to Run the Application
 
-- readme.md - it is basic documentation of project, containing helpful informations for running and deployng of applicaiton
-- .gitignore - this file indicates which files and folders have to be ignored by Git
+### Clone the Repository
+```sh
+git clone https://github.com/mateo139/CICORE_CS50
+cd CICORE_CS50
+```
 
-### __pycache__
-- pycache/ - this directory contains bytecode files and it is generated automatically (what is more it should be ignored by Git)
+### Set Up a Virtual Environment
+```sh
+python -m venv venv
+source venv/bin/activate   # On macOS/Linux
+venv\Scripts\activate     # On Windows
+```
 
-### static
-- static/ - the purpose of this directory is to collect static files (eg. CSS and images)
-- styles.css - it contains styles and images
-- welcome_image.jpg - it is image used in welcome section
+### Install Dependencies
+```sh
+pip install -r requirements.txt
+```
 
-### templates
-- templates/ - it is used for rendering web pages
-- welcome.html - it is used for rendering of welcome section 
-- index.html - it is template of input section
-- result.html - it is template of result section
+### Run the Application
+```sh
+python app.py
+```
 
-### venv
-- venv/ - it is a director due to virtual environment purpose. it contains dependencies and packages from the project. It is recommended to ignore this directory with version control system
+### Open in Browser
+Visit `http://127.0.0.1:5000/` in your browser to access the application.
 
+## Project Structure
 
+### Root Directory
+- **`app.py`** – Main Flask application file handling routes and calculations.
+- **`utils.py`** – Utility functions used in calculations.
+- **`calculation.py`** – Core logic for structural calculations.
+- **`test_app.py`** – Unit tests for the project.
+- **`requirements.txt`** – List of required dependencies.
+- **`README.md`** – Documentation for running and deploying the application.
+- **`.gitignore`** – Specifies files to be ignored by Git.
+
+### Additional Directories
+- **`__pycache__/`** – Stores compiled Python bytecode (should be ignored by Git).
+- **`static/`** – Contains static files such as CSS and images.
+  - `styles.css` – Defines the application’s styling.
+  - `welcome_image.jpg` – Image used in the welcome section.
+- **`templates/`** – HTML templates for rendering web pages.
+  - `welcome.html` – Template for the welcome section.
+  - `index.html` – Template for the input section.
+  - `result.html` – Template for displaying calculation results.
+- **`venv/`** – Virtual environment directory (should be ignored by version control).
+
+## Testing
+Run unit tests using Pytest:
+```sh
+pytest test_app.py
+```
+
+### Example Unit Test
+**Input:**
+```plaintext
+End-plate height (hp): 100 mm
+End-plate width (bp): 200 mm
+Edge distance (dr): 10 mm
+Number of holes (n): 4
+Thickness of elastomeric bearing (te): 10 mm
+```
+
+**Output:**
+```plaintext
+Neutral axis distance (z0): 96 mm
+Shape factor (S): 2.9
+Allowable stresses (sigma_all): 17.54 N/mm²
+Verification status: Fulfilled
+```
+
+## Contributing
+Contributions are welcome! Follow these steps to contribute:
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Commit your changes and push them to your fork.
+4. Submit a pull request.
+
+## License
+This project is licensed under the MIT License. See the `LICENSE` file for details.
 

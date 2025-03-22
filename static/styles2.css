@@ -1,10 +1,30 @@
-.back-photo {
-    background-image: url('./welcome_image.jpg');
+.welcome-box {
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Light blue background with transparency */
+    border-radius: 10px;
+    /* Rounded corners */
+    padding: 30px;
+    /* Add padding inside the box */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
+}
+
+.hero.background-image {
+    background-image: url('/static/welcome_image.jpg');
+    /* Replace with your image path */
     background-size: cover;
-    background-repeat: no-repeat;
     background-position: center;
-    height: 100vh;
-    width: 100%;
-    position: relative;
-    z-index: 1;
+}
+
+
+.button.is-primary {
+    background-color: #3273dc;
+    /* Bulma's primary color */
+    border-color: #3273dc;
+}
+
+.button.is-primary:hover {
+    background-color: #275aa8;
+    /* Darker shade for hover effect */
+    border-color: #275aa8;
 }

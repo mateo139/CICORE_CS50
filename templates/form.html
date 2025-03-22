@@ -7,6 +7,23 @@
     <title>Welcome!</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles2.css') }}">
+    <script>
+        function toggleInputs() {
+            var choice = document.getElementById("choice").value;
+            var endPlateFields = document.querySelectorAll(".end-plate");
+            var elastomericFields = document.querySelectorAll(".elastomeric");
+
+            if (choice === "p") {
+                endPlateFields.forEach(el => el.style.display = "block");
+                elastomericFields.forEach(el => el.style.display = "none");
+            } else {
+                endPlateFields.forEach(el => el.style.display = "none");
+                elastomericFields.forEach(el => el.style.display = "block");
+            }
+        }
+
+        window.onload = toggleInputs;
+    </script>
 </head>
 
 <body>
@@ -19,128 +36,134 @@
                             <h1 class="title has-text-centered">Please enter data.</h1>
 
                             <form action="/calculate" method="POST" id="calculation-form">
-
-                                <div class="field">
-                                    <label class="label">Define an element:</label>
-                                    <div class="control">
-                                        <div class="select">
-                                            <select name="choice" id="choice" onchange="toggleInputs()">
-                                                <option value="p">End-plate</option>
-                                                <option value="b">Elastomeric layer</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div class="columns is-multiline">
                                     <div class="column is-6">
-                                        <div class="field">
-                                            <label class="label">End-plate height (hp):</label>
-                                            <div class="control">
-                                                <input class="input" type="text" name="hp" required
-                                                    placeholder="Enter value"> [mm]
+                                        <label class="label">Define an element:</label>
+                                        <div class="control">
+                                            <div class="select">
+                                                <select name="choice" id="choice" onchange="toggleInputs()">
+                                                    <option value="p">End-plate</option>
+                                                    <option value="b">Elastomeric layer</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="column is-6">
-                                        <div class="field">
-                                            <label class="label">End-plate width (bp):</label>
-                                            <div class="control">
-                                                <input class="input" type="text" name="bp" required
-                                                    placeholder="Enter value"> [mm]
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="column is-6">
-                                        <div class="field">
-                                            <label class="label">Edge distance (dr):</label>
-                                            <div class="control">
-                                                <input class="input" type="text" name="dr" required
-                                                    placeholder="Enter value"> [mm]
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="column is-6">
-                                        <div class="field">
-                                            <label class="label">Thickness of elastomeric bearing (te):</label>
-                                            <div class="control">
-                                                <div class="select">
-                                                    <select name="te" required>
-                                                        <option value="5">5</option>
-                                                        <option value="10">10</option>
-                                                        <option value="15">15</option>
-                                                        <option value="20">20</option>
-                                                    </select>
-                                                </div> [mm]
-                                            </div>
-                                        </div>
-                                        <div class="column is-6">
-                                            <label class="label">Values of influences: </label>
-                                            <select name="influence_choice" required>
-                                                <option value="c" selected>Characteristic</option>
-                                                <option value="d">Design</option>
-                                            </select>
-                                        </div>
 
+                                    <div class="column is-6 end-plate">
+                                        <label class="label">End-plate height (hp):</label>
+                                        <div class="control">
+                                            <input class="input" type="text" name="hp" placeholder="Enter value"> [mm]
+                                        </div>
                                     </div>
+
+                                    <div class="column is-6 end-plate">
+                                        <label class="label">End-plate width (bp):</label>
+                                        <div class="control">
+                                            <input class="input" type="text" name="bp" placeholder="Enter value"> [mm]
+                                        </div>
+                                    </div>
+
+                                    <div class="column is-6 end-plate">
+                                        <label class="label">Edge distance (dr):</label>
+                                        <div class="control">
+                                            <input class="input" type="text" name="dr" placeholder="Enter value"> [mm]
+                                        </div>
+                                    </div>
+
+                                    <div class="column is-6 elastomeric">
+                                        <label class="label">Elastomeric height (he):</label>
+                                        <div class="control">
+                                            <input class="input" type="text" name="he" placeholder="Enter value"> [mm]
+                                        </div>
+                                    </div>
+
+                                    <div class="column is-6 elastomeric">
+                                        <label class="label">Elastomeric width (be):</label>
+                                        <div class="control">
+                                            <input class="input" type="text" name="be" placeholder="Enter value"> [mm]
+                                        </div>
+                                    </div>
+
                                     <div class="column is-6">
-                                        <div class="field">
-                                            <label class="label">Bending moment (My):</label>
-                                            <div class="control">
-                                                <input class="input" type="text" name="My" placeholder="Enter value">
-                                                [kNm]
+                                        <label class="label">Thickness of elastomeric bearing (te):</label>
+                                        <div class="control">
+                                            <div class="select">
+                                                <select name="te" required>
+                                                    <option value="5">5</option>
+                                                    <option value="10">10</option>
+                                                    <option value="15">15</option>
+                                                    <option value="20">20</option>
+                                                </select>
+                                            </div> [mm]
+                                        </div>
+                                    </div>
+
+                                    <div class="column is-6">
+                                        <label class="label">Values of influences: </label>
+                                        <div class="control">
+                                            <div class="select">
+                                                <select name="influence_choice" required>
+                                                    <option value="c" selected>Characteristic</option>
+                                                    <option value="d">Design</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="column is-6">
-                                        <div class="field">
-                                            <label class="label">Axial force (N):</label>
-                                            <div class="control">
-                                                <input class="input" type="text" name="N" placeholder="Enter value">
-                                                [kN]
+                                        <label class="label">Bending moment (My or Myd):</label>
+                                        <div class="control">
+                                            <input class="input" type="text" name="My" placeholder="Enter value"> [kNm]
+                                        </div>
+                                    </div>
+
+                                    <div class="column is-6">
+                                        <label class="label">Axial force (N or Nd):</label>
+                                        <div class="control">
+                                            <input class="input" type="text" name="N" placeholder="Enter value"> [kN]
+                                        </div>
+                                    </div>
+
+                                    <div class="column is-6">
+                                        <label class="label">Preload bolt force (Fs):</label>
+                                        <div class="control">
+                                            <input class="input" type="text" name="Fs" placeholder="Enter value"> [kN]
+                                        </div>
+                                    </div>
+
+                                    <div class="column is-6">
+                                        <label class="label">Number of holes (n):</label>
+                                        <div class="control">
+                                            <div class="select">
+                                                <select name="n" required>
+                                                    <option value="2">2</option>
+                                                    <option value="4">4</option>
+                                                    <option value="6">6</option>
+                                                    <option value="8">8</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="column is-6">
-                                        <div class="field">
-                                            <label class="label">Preload bolt force (Fs):</label>
-                                            <div class="control">
-                                                <input class="input" type="text" name="Fs" placeholder="Enter value">
-                                                [kN]
-                                            </div>
+                                        <label class="label">Distance "e2" between bolt rows:</label>
+                                        <div class="control">
+                                            <input class="input" type="text" name="e2" required
+                                                placeholder="Enter value"> [mm]
                                         </div>
                                     </div>
+
                                     <div class="column is-6">
-                                        <div class="field">
-                                            <label class="label">Number of holes (n):</label>
-                                            <div class="control">
-                                                <input class="input" type="text" name="n" required
-                                                    placeholder="Enter value"> [pcs]
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="column is-6">
-                                        <div class="field">
-                                            <label class="label">Distance "e2" between bolt rows:</label>
-                                            <div class="control">
-                                                <input class="input" type="text" name="e2" required
-                                                    placeholder="Enter value"> [mm]
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="column is-6">
-                                        <div class="field">
-                                            <label class="label">Diameter of holes (d):</label>
-                                            <div class="control">
-                                                <input class="input" type="text" name="d" required
-                                                    placeholder="Enter value"> [mm]
-                                            </div>
+                                        <label class="label">Diameter of holes (d):</label>
+                                        <div class="control">
+                                            <input class="input" type="text" name="d" required
+                                                placeholder="Enter value"> [mm]
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="field has-text-centered">
-                                    <button type="submit" class="button is-primary">Calculate</button>
+                                    <button type="submit" class="button is-blue is-large">Calculate</button>
                                 </div>
                             </form>
                         </div>
@@ -149,6 +172,18 @@
             </div>
         </div>
     </section>
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>
+                <strong>Steel End-Plate Calculator</strong> by
+                <a href="https://codin.com.pl" target="_blank">CODIN Mateusz Laska</a>.
+            </p>
+        </div>
+    </footer>
+
 </body>
+
+
 
 </html>

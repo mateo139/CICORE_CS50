@@ -1,4 +1,5 @@
 "Engineering calculations functions:"
+
 from math import pi
 
 
@@ -13,13 +14,13 @@ def geometry_decision(choice, hp=None, bp=None, dr=None, he=None, be=None):
     return he, be
 
 
-def get_characteristic_influences(choice, My=None, N=None, My_d=None, Nd=None, Fs=None):
+def get_characteristic_influences(choice, My=None, N=None, Fs=None):
     "Function for characteristic influences definition"
     if choice == "c":
         return My, N, Fs
     elif choice == "d":
-        My = My_d / 1.4
-        N = Nd / 1.4
+        My = My / 1.4
+        N = N / 1.4
         return My, N, Fs
 
 

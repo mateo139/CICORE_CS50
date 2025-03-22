@@ -33,18 +33,16 @@ def calculate(form_data):
         N = float(form_data["N"])
         Fs = float(form_data["Fs"])
     elif influence_choice == "d":
-        My_d = float(form_data["My_d"])
-        Nd = float(form_data["Nd"])
+        My = float(form_data["My"])
+        N = float(form_data["N"])
         Fs = float(form_data["Fs"])
-        My, N, Fs = get_characteristic_influences(
-            influence_choice, My_d=My_d, Nd=Nd, Fs=Fs
-        )
+        My, N, Fs = get_characteristic_influences(influence_choice, My=My, N=N, Fs=Fs)
 
     # Request holes definition and thickness of the bearing
-    n = int(form_data["n"])
     e2 = float(form_data["e2"])
     d = float(form_data["d"])
     te = int(form_data["te"])
+    n = int(form_data["n"])
 
     # Calculate z0, hm and sigma_vorh
     z0 = z0_calculation(n, Fs, N, My, he)
