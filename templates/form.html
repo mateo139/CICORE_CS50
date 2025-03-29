@@ -26,8 +26,14 @@
     </script>
 </head>
 
-<body>
+<body class="fade-in">
     <section class="hero background-image back-photo is-fullheight">
+
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='codin.png') }}" alt="CODIN Logo">
+        </div>
+
+
         <div class="hero-body">
             <div class="container">
                 <div class="columns is-centered">
@@ -52,35 +58,40 @@
                                     <div class="column is-6 end-plate">
                                         <label class="label">End-plate height (hp):</label>
                                         <div class="control">
-                                            <input class="input" type="text" name="hp" placeholder="Enter value"> [mm]
+                                            <input class="input" type="text" name="hp" required
+                                                placeholder="Enter value"> [mm]
                                         </div>
                                     </div>
 
                                     <div class="column is-6 end-plate">
                                         <label class="label">End-plate width (bp):</label>
                                         <div class="control">
-                                            <input class="input" type="text" name="bp" placeholder="Enter value"> [mm]
+                                            <input class="input" type="text" name="bp" required
+                                                placeholder="Enter value"> [mm]
                                         </div>
                                     </div>
 
                                     <div class="column is-6 end-plate">
                                         <label class="label">Edge distance (dr):</label>
                                         <div class="control">
-                                            <input class="input" type="text" name="dr" placeholder="Enter value"> [mm]
+                                            <input class="input" type="text" name="dr" required
+                                                placeholder="Enter value"> [mm]
                                         </div>
                                     </div>
 
                                     <div class="column is-6 elastomeric">
                                         <label class="label">Elastomeric height (he):</label>
                                         <div class="control">
-                                            <input class="input" type="text" name="he" placeholder="Enter value"> [mm]
+                                            <input class="input" type="text" name="he" required
+                                                placeholder="Enter value"> [mm]
                                         </div>
                                     </div>
 
                                     <div class="column is-6 elastomeric">
                                         <label class="label">Elastomeric width (be):</label>
                                         <div class="control">
-                                            <input class="input" type="text" name="be" placeholder="Enter value"> [mm]
+                                            <input class="input" type="text" name="be" required
+                                                placeholder="Enter value"> [mm]
                                         </div>
                                     </div>
 
@@ -88,7 +99,7 @@
                                         <label class="label">Thickness of elastomeric bearing (te):</label>
                                         <div class="control">
                                             <div class="select">
-                                                <select name="te" required>
+                                                <select name="te">
                                                     <option value="5">5</option>
                                                     <option value="10">10</option>
                                                     <option value="15">15</option>
@@ -102,7 +113,7 @@
                                         <label class="label">Values of influences: </label>
                                         <div class="control">
                                             <div class="select">
-                                                <select name="influence_choice" required>
+                                                <select name="influence_choice">
                                                     <option value="c" selected>Characteristic</option>
                                                     <option value="d">Design</option>
                                                 </select>
@@ -113,21 +124,24 @@
                                     <div class="column is-6">
                                         <label class="label">Bending moment (My or Myd):</label>
                                         <div class="control">
-                                            <input class="input" type="text" name="My" placeholder="Enter value"> [kNm]
+                                            <input class="input" type="text" name="My" required
+                                                placeholder="Enter value"> [kNm]
                                         </div>
                                     </div>
 
                                     <div class="column is-6">
                                         <label class="label">Axial force (N or Nd):</label>
                                         <div class="control">
-                                            <input class="input" type="text" name="N" placeholder="Enter value"> [kN]
+                                            <input class="input" type="text" name="N" required
+                                                placeholder="Enter value"> [kN]
                                         </div>
                                     </div>
 
                                     <div class="column is-6">
                                         <label class="label">Preload bolt force (Fs):</label>
                                         <div class="control">
-                                            <input class="input" type="text" name="Fs" placeholder="Enter value"> [kN]
+                                            <input class="input" type="text" name="Fs" required
+                                                placeholder="Enter value"> [kN]
                                         </div>
                                     </div>
 
@@ -135,7 +149,7 @@
                                         <label class="label">Number of holes (n):</label>
                                         <div class="control">
                                             <div class="select">
-                                                <select name="n" required>
+                                                <select name="n">
                                                     <option value="2">2</option>
                                                     <option value="4">4</option>
                                                     <option value="6">6</option>
@@ -163,7 +177,7 @@
                                 </div>
 
                                 <div class="field has-text-centered">
-                                    <button type="submit" class="button is-blue is-large">Calculate</button>
+                                    <button type="submit" class="button is-primary is-large">Calculate</button>
                                 </div>
                             </form>
                         </div>
