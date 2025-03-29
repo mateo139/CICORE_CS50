@@ -10,8 +10,12 @@ from utils import (
 
 def calculate(form_data):
     """Route to handle form submission and perform calculations
-    Fuction for calculation of the results"""
-    # Request form data
+    Function for calculation of the results"""
+    # Preprocess form data to replace commas with dots
+    form_data = {
+        key: value.replace(",", ".") if isinstance(value, str) else value
+        for key, value in form_data.items()
+    }
 
     print(form_data)
 
