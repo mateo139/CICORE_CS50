@@ -55,7 +55,16 @@
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
+}
+
+
+.modal img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }

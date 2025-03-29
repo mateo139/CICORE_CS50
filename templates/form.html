@@ -32,6 +32,14 @@
         document.getElementById("calculation-form").addEventListener("submit", replaceCommas);
 
         window.onload = toggleInputs;
+
+        function openModal() {
+            document.getElementById("forcesModelModal").classList.add("is-active");
+        }
+
+        function closeModal() {
+            document.getElementById("forcesModelModal").classList.remove("is-active");
+        }
     </script>
 </head>
 
@@ -181,9 +189,28 @@
                                 </div>
 
                                 <div class="field has-text-centered">
+                                    <button type="button" class="button is-info is-medium" onclick="openModal()">View
+                                        Forces
+                                        Model</button>
+                                </div>
+
+                                <div class="field has-text-centered">
                                     <button type="submit" class="button is-primary is-large">Calculate</button>
                                 </div>
                             </form>
+
+
+                            <!-- Modal Structure -->
+                            <div id="forcesModelModal" class="modal">
+                                <div class="modal-background" onclick="closeModal()"></div>
+                                <div class="modal-content">
+                                    <div class="box">
+                                        <img src="{{ url_for('static', filename='forces_model.png') }}"
+                                            alt="Forces Model">
+                                    </div>
+                                </div>
+                                <button class="modal-close is-large" aria-label="close" onclick="closeModal()"></button>
+                            </div>
                         </div>
                     </div>
                 </div>
