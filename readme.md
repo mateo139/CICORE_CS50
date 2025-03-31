@@ -1,7 +1,7 @@
 # STEEL END-PLATE THERMAL SEPARATION LAYER CALCULATOR
 
 ## Video Demo
-[Watch the demo here](URL HERE)
+[Watch the demo here](https://youtu.be/d0HG8a0dSnU)
 
 ## Overview
 This project is a Python-based web application built using the Flask framework. It assists structural engineers in calculating steel end-plate connections with a thermal separation layer made of NBR (produced by Calenberg Ingenieure GmbH). The application implements an algorithm developed by Professor Nasdala from the Institute for Structural Analysis at the University of Hanover, Germany.
