@@ -9,16 +9,30 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles2.css') }}">
     <script>
         function toggleInputs() {
-            var choice = document.getElementById("choice").value;
-            var endPlateFields = document.querySelectorAll(".end-plate");
-            var elastomericFields = document.querySelectorAll(".elastomeric");
+            const choice = document.getElementById("choice").value;
+            const endPlateFields = document.querySelectorAll(".end-plate");
+            const elastomericFields = document.querySelectorAll(".elastomeric");
 
             if (choice === "p") {
-                endPlateFields.forEach(el => el.style.display = "block");
-                elastomericFields.forEach(el => el.style.display = "none");
-            } else {
-                endPlateFields.forEach(el => el.style.display = "none");
-                elastomericFields.forEach(el => el.style.display = "block");
+                // Show end-plate fields and hide elastomeric fields
+                endPlateFields.forEach(el => {
+                    el.style.display = "block";
+                    el.querySelector("input").setAttribute("required", "required");
+                });
+                elastomericFields.forEach(el => {
+                    el.style.display = "none";
+                    el.querySelector("input").removeAttribute("required");
+                });
+            } else if (choice === "b") {
+                // Show elastomeric fields and hide end-plate fields
+                elastomericFields.forEach(el => {
+                    el.style.display = "block";
+                    el.querySelector("input").setAttribute("required", "required");
+                });
+                endPlateFields.forEach(el => {
+                    el.style.display = "none";
+                    el.querySelector("input").removeAttribute("required");
+                });
             }
         }
 
